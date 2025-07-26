@@ -1,0 +1,17 @@
+# JetBrains IDEs
+.idea/
+
+# Dependency directories
+node_modules/
+
+# Build output
+dist/
+
+# Output of 'npm pack'
+*.tgz
+
+# Coverage directories
+coverage/
+
+# Misc
+.DS_Store

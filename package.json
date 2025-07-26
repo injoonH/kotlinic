@@ -1,0 +1,64 @@
+{
+  "name": "kotlinic",
+  "version": "0.1.0",
+  "description": "A lightweight TypeScript utility library inspired by Kotlin.",
+  "keywords": [
+    "kotlin",
+    "kotlinic"
+  ],
+  "homepage": "https://kotlinic.com",
+  "bugs": "https://github.com/injoonH/kotlinic/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/injoonH/kotlinic.git"
+  },
+  "license": "MIT",
+  "author": "Injoon Hwang <yuwol036@gmail.com>",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/common/index.d.mts",
+        "default": "./dist/common/index.mjs"
+      },
+      "require": {
+        "types": "./dist/common/index.d.ts",
+        "default": "./dist/common/index.js"
+      }
+    },
+    "./collections": {
+      "import": {
+        "types": "./dist/collections/index.d.mts",
+        "default": "./dist/collections/index.mjs"
+      },
+      "require": {
+        "types": "./dist/collections/index.d.ts",
+        "default": "./dist/collections/index.js"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "format": "prettier --write --check .",
+    "test": "vitest --coverage --typecheck",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "@vitest/coverage-v8": "^3.2.4",
+    "prettier": "^3.6.2",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  },
+  "packageManager": "pnpm@10.13.1",
+  "engines": {
+    "node": ">=22.17.1",
+    "pnpm": "10.13.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
