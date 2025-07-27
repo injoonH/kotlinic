@@ -6,6 +6,9 @@ export default defineConfig({
   description: 'A lightweight TypeScript utility library inspired by Kotlin.',
   head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/kotlin-logo.svg' }]],
   themeConfig: {
+    outline: {
+      level: [2, 3],
+    },
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Overview', link: '/overview' },
@@ -34,6 +37,8 @@ export default defineConfig({
                   { text: 'error()', link: '/api/core/kotlin-stdlib/kotlin/error' },
                   { text: 'require()', link: '/api/core/kotlin-stdlib/kotlin/require' },
                   { text: 'requireNotNull()', link: '/api/core/kotlin-stdlib/kotlin/require-not-null' },
+                  { text: 'Result', link: '/api/core/kotlin-stdlib/kotlin/-result' },
+                  { text: 'runCatching()', link: '/api/core/kotlin-stdlib/kotlin/run-catching' },
                 ],
                 collapsed: true,
               },
