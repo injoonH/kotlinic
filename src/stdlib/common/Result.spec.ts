@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { Result } from './Result.js'
-import type { Throwable } from './Throwable'
+import type { Throwable } from './Throwable.js'
 
 describe('Result', () => {
   it('should create a successful result', () => {
