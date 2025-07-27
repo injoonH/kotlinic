@@ -1,4 +1,4 @@
-# runCatching()
+# runCatching
 
 ```ts
 function runCatching<T>(block: () => T): Result<T>
