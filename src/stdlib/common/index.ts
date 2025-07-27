@@ -6,6 +6,8 @@ export { require } from './require.js'
 export { requireNotNull } from './requireNotNull.js'
 export { Result } from './Result.js'
 export { runCatching } from './runCatching.js'
+export { takeIf } from './takeIf.js'
+export { takeUnless } from './takeUnless.js'
 export type { Throwable } from './Throwable.js'
 
 export { Exception } from './exceptions/Exception.js'
