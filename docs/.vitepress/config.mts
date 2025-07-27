@@ -39,6 +39,8 @@ export default defineConfig({
                   { text: 'requireNotNull()', link: '/api/core/kotlin-stdlib/kotlin/require-not-null' },
                   { text: 'Result', link: '/api/core/kotlin-stdlib/kotlin/-result' },
                   { text: 'runCatching()', link: '/api/core/kotlin-stdlib/kotlin/run-catching' },
+                  { text: 'takeIf()', link: '/api/core/kotlin-stdlib/kotlin/take-if' },
+                  { text: 'takeUnless()', link: '/api/core/kotlin-stdlib/kotlin/take-unless' },
                 ],
                 collapsed: true,
               },
