@@ -4,7 +4,18 @@ import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-i
 export default defineConfig({
   title: 'Kotlinic',
   description: 'A lightweight TypeScript utility library inspired by Kotlin.',
-  head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/kotlin-logo.svg' }]],
+  head: [
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/kotlin-logo.svg' }],
+    ['script', { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-LEF675E0QK' }],
+    [
+      'script',
+      {},
+      `window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-LEF675E0QK');`,
+    ],
+  ],
   themeConfig: {
     outline: {
       level: [2, 3],
