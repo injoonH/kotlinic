@@ -9,6 +9,7 @@ export { runCatching } from './runCatching.js'
 export { takeIf } from './takeIf.js'
 export { takeUnless } from './takeUnless.js'
 export type { Throwable } from './Throwable.js'
+export { TODO } from './TODO.js'
 
 export { Exception } from './exceptions/Exception.js'
 export { IllegalArgumentException } from './exceptions/IllegalArgumentException.js'

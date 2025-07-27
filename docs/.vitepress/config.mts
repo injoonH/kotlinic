@@ -41,6 +41,7 @@ export default defineConfig({
                   { text: 'runCatching()', link: '/api/core/kotlin-stdlib/kotlin/run-catching' },
                   { text: 'takeIf()', link: '/api/core/kotlin-stdlib/kotlin/take-if' },
                   { text: 'takeUnless()', link: '/api/core/kotlin-stdlib/kotlin/take-unless' },
+                  { text: 'TODO()', link: '/api/core/kotlin-stdlib/kotlin/-t-o-d-o' },
                 ],
                 collapsed: true,
               },
