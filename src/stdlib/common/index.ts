@@ -17,3 +17,6 @@ export { IllegalStateException } from './exceptions/IllegalStateException.js'
 export { NoSuchElementException } from './exceptions/NoSuchElementException.js'
 export { NotImplementedError } from './exceptions/NotImplementedError.js'
 export { RuntimeException } from './exceptions/RuntimeException.js'
+
+export { Pair } from './tuples/Pair.js'
+export { Triple } from './tuples/Triple.js'
