@@ -15,7 +15,7 @@ export function zipWithNext<T>(array: T[]): Pair<T, T>[]
  */
 export function zipWithNext<T, R>(array: T[], transform: (a: T, b: T) => R): R[]
 
-export function zipWithNext<T, R>(array: T[], transform?: (a: T, b: T) => R): R[] {
+export function zipWithNext<T, R = Pair<T, T>>(array: T[], transform?: (a: T, b: T) => R): R[] {
   if (array.length < 2) {
     return []
   }

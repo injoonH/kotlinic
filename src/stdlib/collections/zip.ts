@@ -13,7 +13,7 @@ export function zip<T, R>(array: T[], other: R[]): Pair<T, R>[]
  */
 export function zip<T, R, V>(array: T[], other: R[], transform: (a: T, b: R) => V): V[]
 
-export function zip<T, R, V>(array: T[], other: R[], transform?: (a: T, b: R) => V): V[] {
+export function zip<T, R, V = Pair<T, R>>(array: T[], other: R[], transform?: (a: T, b: R) => V): V[] {
   const size = Math.min(array.length, other.length)
   const result = new Array(size)
   const func = transform ?? ((a: T, b: R) => new Pair(a, b))
