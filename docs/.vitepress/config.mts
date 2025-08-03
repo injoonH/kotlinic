@@ -47,6 +47,7 @@ export default defineConfig({
                   { text: 'emptyArray()', link: '/api/core/kotlin-stdlib/kotlin/empty-array' },
                   { text: 'error()', link: '/api/core/kotlin-stdlib/kotlin/error' },
                   { text: 'Pair', link: '/api/core/kotlin-stdlib/kotlin/-pair' },
+                  { text: 'repeat()', link: '/api/core/kotlin-stdlib/kotlin/repeat' },
                   { text: 'require()', link: '/api/core/kotlin-stdlib/kotlin/require' },
                   { text: 'requireNotNull()', link: '/api/core/kotlin-stdlib/kotlin/require-not-null' },
                   { text: 'Result', link: '/api/core/kotlin-stdlib/kotlin/-result' },
