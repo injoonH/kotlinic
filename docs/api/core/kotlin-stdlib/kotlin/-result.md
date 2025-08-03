@@ -96,7 +96,11 @@ it is failure.
 ### map
 
 ```ts
-map<R>(transform: (value: T) => R): Result<R>
+map<R>(
+  transform: (value: T) => R
+): R extends Promise<infer U>
+  ? Promise<Result<U>>
+  : Result<R>
 ```
 
 Returns the encapsulated result of the given `transform` function applied to the encapsulated value if this instance
@@ -108,7 +112,11 @@ alternative that encapsulates exceptions.
 ### mapCatching
 
 ```ts
-mapCatching<R>(transform: (value: T) => R): Result<R>
+mapCatching<R>(
+  transform: (value: T) => R
+): R extends Promise<infer U>
+  ? Promise<Result<U>>
+  : Result<R>
 ```
 
 Returns the encapsulated result of the given `transform` function applied to the encapsulated value if this instance
@@ -139,6 +147,7 @@ unchanged.
 
 ```ts
 recover(transform: (exception: Throwable) => T): Result<T>
+recover(transform: (exception: Throwable) => Promise<T>): Promise<Result<T>>
 ```
 
 Returns the encapsulated result of the given `transform` function applied to the encapsulated `Throwable` exception if
@@ -151,6 +160,7 @@ alternative that encapsulates exceptions.
 
 ```ts
 recoverCatching(transform: (exception: Throwable) => T): Result<T>
+recoverCatching(transform: (exception: Throwable) => Promise<T>): Promise<Result<T>>
 ```
 
 Returns the encapsulated result of the given `transform` function applied to the encapsulated `Throwable` exception if

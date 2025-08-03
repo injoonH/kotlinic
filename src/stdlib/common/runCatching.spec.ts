@@ -16,4 +16,19 @@ describe('runCatching', () => {
     expect(result.isFailure).toBe(true)
     expect(result.exceptionOrNull()).toBe(error)
   })
+
+  it('should return a successful result for async functions that resolve', async () => {
+    const result = await runCatching(async () => 42)
+    expect(result.isSuccess).toBe(true)
+    expect(result.getOrNull()).toBe(42)
+  })
+
+  it('should return a failure result for async functions that throw', async () => {
+    const error = new Error('Async test error')
+    const result = await runCatching(async () => {
+      throw error
+    })
+    expect(result.isFailure).toBe(true)
+    expect(result.exceptionOrNull()).toBe(error)
+  })
 })
