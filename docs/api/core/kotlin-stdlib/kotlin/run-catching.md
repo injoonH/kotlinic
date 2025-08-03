@@ -1,7 +1,11 @@
 # runCatching
 
 ```ts
-function runCatching<T>(block: () => T): Result<T>
+function runCatching<T>(
+  block: () => T
+): T extends Promise<infer U>
+  ? Promise<Result<U>>
+  : Result<T>
 ```
 
 Calls the specified function `block` and returns its encapsulated result if invocation was successful, catching any

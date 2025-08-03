@@ -1,3 +1,4 @@
+import type { MaybePromise, NonPromise } from './Promise.js'
 import type { Throwable } from './Throwable.js'
 
 type Ok<T> = { ok: true; value: T }
@@ -89,8 +90,24 @@ export class Result<T> {
    * Note, that this function rethrows any {@linkcode Throwable} exception thrown by {@linkcode transform} function.
    * See {@linkcode Result#mapCatching} for an alternative that encapsulates exceptions.
    */
-  map<R>(transform: (value: T) => R): Result<R> {
-    return this.result.ok ? Result.success(transform(this.result.value)) : Result.failure(this.result.exception)
+  map<R>(transform: (value: T) => NonPromise<R>): Result<R>
+
+  /**
+   * Returns the encapsulated result of the given {@linkcode transform} function applied to the encapsulated value
+   * if this instance represents [success]{@linkcode Result#isSuccess}
+   * or the original encapsulated {@linkcode Throwable} exception if it is [failure]{@linkcode Result#isFailure}.
+   *
+   * Note, that this function rethrows any {@linkcode Throwable} exception thrown by {@linkcode transform} function.
+   * See {@linkcode Result#mapCatching} for an alternative that encapsulates exceptions.
+   */
+  map<R>(transform: (value: T) => Promise<R>): Promise<Result<R>>
+
+  map<R>(transform: (value: T) => MaybePromise<R>): MaybePromise<Result<R>> {
+    if (!this.result.ok) {
+      return Result.failure(this.result.exception)
+    }
+    const value = transform(this.result.value)
+    return value instanceof Promise ? value.then((it) => Result.success(it)) : Result.success(value)
   }
 
   /**
@@ -102,12 +119,28 @@ export class Result<T> {
    * thrown by {@linkcode transform} function and encapsulates it as a failure.
    * See {@linkcode Result#map} for an alternative that rethrows exceptions from `transform` function.
    */
-  mapCatching<R>(transform: (value: T) => R): Result<R> {
+  mapCatching<R>(transform: (value: T) => NonPromise<R>): Result<R>
+
+  /**
+   * Returns the encapsulated result of the given {@linkcode transform} function applied to the encapsulated value
+   * if this instance represents [success]{@linkcode Result#isSuccess}
+   * or the original encapsulated {@linkcode Throwable} exception if it is [failure]{@linkcode Result#isFailure}.
+   *
+   * This function catches any {@linkcode Throwable} exception
+   * thrown by {@linkcode transform} function and encapsulates it as a failure.
+   * See {@linkcode Result#map} for an alternative that rethrows exceptions from `transform` function.
+   */
+  mapCatching<R>(transform: (value: T) => Promise<R>): Promise<Result<R>>
+
+  mapCatching<R>(transform: (value: T) => MaybePromise<R>): MaybePromise<Result<R>> {
     if (!this.result.ok) {
       return Result.failure(this.result.exception)
     }
     try {
-      return Result.success(transform(this.result.value))
+      const value = transform(this.result.value)
+      return value instanceof Promise
+        ? value.then((it) => Result.success(it)).catch((it) => Result.failure(it))
+        : Result.success(value)
     } catch (error) {
       return Result.failure(error)
     }
@@ -121,8 +154,24 @@ export class Result<T> {
    * Note, that this function rethrows any {@linkcode Throwable} exception thrown by {@linkcode transform} function.
    * See {@linkcode Result#recoverCatching} for an alternative that encapsulates exceptions.
    */
-  recover(transform: (exception: Throwable) => T): Result<T> {
-    return this.result.ok ? this : Result.success(transform(this.result.exception))
+  recover(transform: (exception: Throwable) => T): Result<T>
+
+  /**
+   * Returns the encapsulated result of the given {@linkcode transform} function applied to
+   * the encapsulated {@linkcode Throwable} exception if this instance represents [failure]{@linkcode Result#isFailure}
+   * or the original encapsulated value if it is [success]{@linkcode Result#isSuccess}.
+   *
+   * Note, that this function rethrows any {@linkcode Throwable} exception thrown by {@linkcode transform} function.
+   * See {@linkcode Result#recoverCatching} for an alternative that encapsulates exceptions.
+   */
+  recover(transform: (exception: Throwable) => Promise<T>): Promise<Result<T>>
+
+  recover(transform: (exception: Throwable) => MaybePromise<T>): MaybePromise<Result<T>> {
+    if (this.result.ok) {
+      return this
+    }
+    const value = transform(this.result.exception)
+    return value instanceof Promise ? value.then((it) => Result.success(it)) : Result.success(value)
   }
 
   /**
@@ -134,12 +183,28 @@ export class Result<T> {
    * and encapsulates it as a failure.
    * See {@linkcode Result#recover} for an alternative that rethrows exceptions.
    */
-  recoverCatching(transform: (exception: Throwable) => T): Result<T> {
+  recoverCatching(transform: (exception: Throwable) => T): Result<T>
+
+  /**
+   * Returns the encapsulated result of the given {@linkcode transform} function applied to
+   * the encapsulated {@linkcode Throwable} exception if this instance represents [failure]{@linkcode Result#isFailure}
+   * or the original encapsulated value if it is [success]{@linkcode Result#isSuccess}.
+   *
+   * This function catches any {@linkcode Throwable} exception thrown by {@linkcode transform} function
+   * and encapsulates it as a failure.
+   * See {@linkcode Result#recover} for an alternative that rethrows exceptions.
+   */
+  recoverCatching(transform: (exception: Throwable) => Promise<T>): Promise<Result<T>>
+
+  recoverCatching(transform: (exception: Throwable) => MaybePromise<T>): MaybePromise<Result<T>> {
     if (this.result.ok) {
       return Result.success(this.result.value)
     }
     try {
-      return Result.success(transform(this.result.exception))
+      const value = transform(this.result.exception)
+      return value instanceof Promise
+        ? value.then((it) => Result.success(it)).catch((it) => Result.failure(it))
+        : Result.success(value)
     } catch (error) {
       return Result.failure(error)
     }
@@ -169,6 +234,11 @@ export class Result<T> {
     return this
   }
 
+  /**
+   * Returns a string `Success(v)` if this instance represents [success]{@linkcode Result#isSuccess}
+   * where `v` is a string representation of the value or a string `Failure(x)` if
+   * it is [failure]{@linkcode Result#isFailure} where `x` is a string representation of the exception.
+   */
   toString(): string {
     return this.result.ok ? `Success(${this.result.value})` : `Failure(${this.result.exception})`
   }
