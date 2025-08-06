@@ -62,6 +62,13 @@ export default defineConfig({
               {
                 text: 'kotlin.collections',
                 items: [
+                  { text: 'first()', link: '/api/core/kotlin-stdlib/kotlin.collections/first' },
+                  { text: 'firstNotNullOf()', link: '/api/core/kotlin-stdlib/kotlin.collections/first-not-null-of' },
+                  {
+                    text: 'firstNotNullOfOrNull()',
+                    link: '/api/core/kotlin-stdlib/kotlin.collections/first-not-null-of-or-null',
+                  },
+                  { text: 'firstOrNull()', link: '/api/core/kotlin-stdlib/kotlin.collections/first-or-null' },
                   { text: 'mapNotNull()', link: '/api/core/kotlin-stdlib/kotlin.collections/map-not-null' },
                   { text: 'mapNotNullTo()', link: '/api/core/kotlin-stdlib/kotlin.collections/map-not-null-to' },
                   { text: 'maxBy()', link: '/api/core/kotlin-stdlib/kotlin.collections/max-by' },
