@@ -1,5 +1,13 @@
 # kotlinic
 
+## v0.5.0
+
+Released on August 6, 2025.
+
+### Features
+
+- Add `first()`, `firstNotNullOf()`, `firstNotNullOfOrNull()`, and `firstOrNull()` functions in [#10](https://github.com/injoonH/kotlinic/pull/10)
+
 ## v0.4.0
 
 Released on August 4, 2025.
