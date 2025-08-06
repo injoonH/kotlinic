@@ -1,3 +1,7 @@
+export { first } from './first.js'
+export { firstNotNullOf } from './firstNotNullOf.js'
+export { firstNotNullOfOrNull } from './firstNotNullOfOrNull.js'
+export { firstOrNull } from './firstOrNull.js'
 export { mapNotNull } from './mapNotNull.js'
 export { mapNotNullTo } from './mapNotNullTo.js'
 export { maxBy } from './maxBy.js'
